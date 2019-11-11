@@ -1,14 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Platform, StatusBar } from 'react-native';
 
-export default function Home(){
+export default function Home({ navigation }){
+
+    function handleSubmit(){
+        navigation.navigate('Login');
+    }
+
     return(
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.headerImg}>
                     <Text>IMG</Text>
                 </View>
-                <Text style={styles.arrowHeader}>SETA</Text>
+                <TouchableOpacity onPress={handleSubmit}>
+                    <Ionicons name='md-arrow-forward' size={58} color='#FFF'/>
+                </TouchableOpacity>
             </View>
             <View>
                 <Text style={styles.text}>Main title</Text>
@@ -18,7 +26,7 @@ export default function Home(){
                 <Text style={styles.rodapeText}>Texto do rodapé</Text>
             </View>
             
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -28,7 +36,8 @@ const styles = StyleSheet.create({
       height: '100%',
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: '#01755d'
+      backgroundColor: '#01755d',
+      paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     header:{
         flexDirection: 'row',
