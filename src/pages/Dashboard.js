@@ -6,8 +6,10 @@ import Card from "../components/Card";
 
 import Service from '../service/BaseAxios';
 
-export default function Dashboard({navigation}) {
+export default function Dashboard({ navigation }) {
+
     const [petitions, setPetitions] = useState([]);
+    const navigator = navigation.getParam('nav');
 
     useEffect(() => getPetitions());
 
@@ -15,6 +17,12 @@ export default function Dashboard({navigation}) {
         Service.get('/petitions').then(result => {
             const data = result.data;
             setPetitions(data);
+        });
+    }
+
+    function goToDetails(obj){
+        navigator.navigate('PetitionDetail',{
+            obj, 
         });
     }
 
@@ -37,7 +45,7 @@ export default function Dashboard({navigation}) {
             </View>
             <ScrollView>
                 {petitions.map((value, index) => {
-                    return <Card callback={() => alert("oi")} name={value.name} url={value.image} desc={value.desc}/>
+                    return <Card callback={() => goToDetails(value)} name={value.name} url={value.image} desc={value.desc}/>
                 })}
             </ScrollView>
         </SafeAreaView>
