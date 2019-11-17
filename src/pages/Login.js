@@ -1,8 +1,23 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, Platform, StatusBar, KeyboardAvoidingView } from 'react-native';
+import React, {useState} from 'react';
+import {
+    Image,
+    KeyboardAvoidingView,
+    Platform,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from 'react-native';
 import AvatarImg from '../../assets/canguruBolado.png';
+import {Ionicons} from "@expo/vector-icons";
 
 export default function Home({ navigation }){
+    function handleSubmit() {
+        navigation.navigate('Dashboard');
+    }
+
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
 
@@ -35,6 +50,10 @@ export default function Home({ navigation }){
                         secureTextEntry={true}
                     />
                 </View>
+
+                <TouchableOpacity onPress={handleSubmit}>
+                    <Ionicons name='md-arrow-forward' size={58} color='#FFF'/>
+                </TouchableOpacity>
 
                 <View style={styles.rodapeContainer}>
                     <Text style={styles.rodapeText}>Texto do rodapé</Text>
