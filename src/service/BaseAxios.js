@@ -5,8 +5,12 @@ export default {
         Axios.defaults.baseURL = baseURL
     },
 
-    async post(endpoint, payload, config) {
-        return await Axios.post(endpoint, payload, config)
+    setHeader(token) {
+        Axios.defaults.headers.common['x-access-token'] = token;
+    },
+
+    async post(endpoint, payload) {
+        return await Axios.post(endpoint, payload)
     },
 
     async get(endpoit) {

@@ -7,6 +7,9 @@ export default function Options({navigation}) {
     const routes = {
         Home: {
             screen: Dashboard,
+            params: {
+                nav: navigation,
+            },
             navigationOptions: {
                 tabBarIcon: ({tintColor}) => (
                     <Icon name="home" type='feather' size={18} color={tintColor}/>
