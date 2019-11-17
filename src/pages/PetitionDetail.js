@@ -3,6 +3,7 @@ import {Ionicons} from '@expo/vector-icons';
 import {Image, View, Text, TouchableOpacity, StyleSheet, Platform, StatusBar, ScrollView} from 'react-native';
 
 import Imagem from '../../assets/canguruBolado.png';
+import { Header } from 'react-native-elements';
 
 export default function PetitionDetail({ navigation }){
     const obj = navigation.getParam('obj');
@@ -11,8 +12,17 @@ export default function PetitionDetail({ navigation }){
         alert('Inserir imagem');
     }
 
+    function previousNav(){
+        navigation.navigate('Options');
+    }
+
     return(
         <View style={styles.container}>
+            <View style={styles.headerButtonContainer}>
+                <TouchableOpacity onPress={previousNav}>
+                    <Ionicons name='md-arrow-round-back' size={38} color='#FFF'/>
+                </TouchableOpacity>
+            </View>
             <Image style={styles.petitionImage} source={Imagem}/>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>{obj.name}</Text>
@@ -73,9 +83,20 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
         color: '#595959',
     },
+    headerButtonContainer:{
+        width: '100%',
+        zIndex: 1,
+        position: 'absolute',
+        flexDirection: 'row',
+        paddingLeft: 20,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight+20: 20,
+        justifyContent: 'flex-start'
+    },
     rodapeButtonContainer:{
-        width: '80%',
-        alignItems: 'flex-end'
+        width: '100%',
+        flexDirection: 'row',
+        paddingRight: 20,
+        justifyContent: 'flex-end'
     },
     rodapeButton:{
         marginTop: 20,

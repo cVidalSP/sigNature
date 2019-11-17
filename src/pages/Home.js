@@ -15,7 +15,7 @@ export default function Home({ navigation }){
                     <Text>IMG</Text>
                 </View>
                 <TouchableOpacity onPress={handleSubmit}>
-                    <Ionicons name='md-arrow-forward' size={58} color='#FFF'/>
+                    <Ionicons name='md-arrow-round-forward' size={58} color='#FFF'/>
                 </TouchableOpacity>
             </View>
             <View>
