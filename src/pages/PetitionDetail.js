@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {Ionicons} from '@expo/vector-icons';
 import {Image, View, Text, TouchableOpacity, StyleSheet, Platform, StatusBar, ScrollView} from 'react-native';
 
-import Imagem from '../../assets/canguruBolado.png';
-import { Header } from 'react-native-elements';
 
 export default function PetitionDetail({ navigation }){
     const obj = navigation.getParam('obj');
-
+    console.log(obj.image)
     function handleSubmit(){
         alert('Inserir imagem');
     }
@@ -23,7 +21,7 @@ export default function PetitionDetail({ navigation }){
                     <Ionicons name='md-arrow-round-back' size={38} color='#FFF'/>
                 </TouchableOpacity>
             </View>
-            <Image style={styles.petitionImage} source={Imagem}/>
+            <Image style={styles.petitionImage} source={{ uri: obj.image }}/>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>{obj.name}</Text>
                 </View>
