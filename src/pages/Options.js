@@ -7,8 +7,8 @@ export default function Options({ navigation }) {
     const routes = {
         Home: {
             screen: Dashboard,
-            params:{
-                nav: navigation
+            params: {
+                nav: navigation,
             },
             navigationOptions: {
                 tabBarIcon: ({tintColor}) => (
