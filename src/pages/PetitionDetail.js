@@ -7,7 +7,7 @@ export default function PetitionDetail({ navigation }){
     const obj = navigation.getParam('obj');
     console.log(obj.image)
     function handleSubmit(){
-        alert('Inserir imagem');
+        navigation.navigate('Verify');
     }
 
     function previousNav(){

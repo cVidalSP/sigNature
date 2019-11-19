@@ -1,8 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native'
+import {StyleSheet, Text, TouchableOpacity, Dimensions} from 'react-native'
 import {Card} from 'react-native-elements';
+import { readDirectoryAsync } from 'expo-file-system';
+
+const deviceWidth = Dimensions.get('window').width;
 
 const CustomCard = (props) => {
+
     return (
         <TouchableOpacity onPress={props.callback}>
             <Card containerStyle={styles.container} title={props.name} image={{uri: props.url}}>
@@ -16,7 +20,8 @@ const CustomCard = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 16
+        borderRadius: 16,
+        width: deviceWidth - 35,
     },
 });
 
