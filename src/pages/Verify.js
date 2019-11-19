@@ -13,35 +13,26 @@ const deviceWidth = Dimensions.get('window').width;
 export default Verify = ({ navigation }) => {
 
     function handleSubmitImage(img){
-        switch(img){
-            case 1:
-                Service.post('/users/authBiometry', {dedo : 1}).then(result => {
-                    return{
-                        data: result.data,
-                    }
-                })
-            break;
-            case 2:
-                Service.post('/users/authBiometry', {dedo : 2}).then(result => {
-                    return{
-                        data: result.data,
-                    }
-                })
-            break;
-            case 3:
-                Service.post('/users/authBiometry', {dedo : 3}).then(result => {
-                    return{
-                        data: result.data,
-                    }
-                })
-            break;
-            default:
+        const response = apiCall(img);
 
+        if(response.data === 'success'){
+            alert('Assinada com sucesso!');
+            navigation.navigate('Options');
+        }else{
+            alert('Falha ao bater digitais. Por favor tente novamente')
         }
     }
 
     function handleSubmitBack(){
         navigation.navigate('Options');
+    }
+
+    function apiCall(string){
+        Service.post('/users/authBiometry', {dedo : string}).then(result =>{
+            return{
+                data: result.data,
+            }
+        })
     }
 
     return (
@@ -53,13 +44,13 @@ export default Verify = ({ navigation }) => {
                 <Text style={styles.headerText}>Selecione sua digital: </Text>
             </View>
             <ScrollView>
-                <TouchableOpacity onPress={() => handleSubmitImage(1)}>
+                <TouchableOpacity onPress={() => handleSubmitImage('dedo1.jpg')}>
                     <Image style={styles.fingerImage} source={Image1}/>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleSubmitImage(2)}>
+                <TouchableOpacity onPress={() => handleSubmitImage('dedo2.jpg')}>
                     <Image style={styles.fingerImage} source={Image2}/>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleSubmitImage(3)}>
+                <TouchableOpacity onPress={() => handleSubmitImage('dedo3.jpg')}>
                     <Image style={styles.fingerImage} source={Image3}/>
                 </TouchableOpacity>
             </ScrollView>
