@@ -2,6 +2,8 @@ import React from 'react';
 import {Ionicons} from '@expo/vector-icons';
 import {StyleSheet, SafeAreaView, Platform, StatusBar, Text, Image, TouchableOpacity, Dimensions, ScrollView, View} from 'react-native'
 
+import Service from "../service/BaseAxios";
+
 import Image1 from '../../assets/dedo1.jpg';
 import Image2 from '../../assets/dedo2.jpg';
 import Image3 from '../../assets/dedo3.jpg';
@@ -11,7 +13,31 @@ const deviceWidth = Dimensions.get('window').width;
 export default Verify = ({ navigation }) => {
 
     function handleSubmitImage(img){
-        alert(`Imagem selecionada : ${img}`)
+        switch(img){
+            case 1:
+                Service.post('/users/authBiometry', {dedo : 1}).then(result => {
+                    return{
+                        data: result.data,
+                    }
+                })
+            break;
+            case 2:
+                Service.post('/users/authBiometry', {dedo : 2}).then(result => {
+                    return{
+                        data: result.data,
+                    }
+                })
+            break;
+            case 3:
+                Service.post('/users/authBiometry', {dedo : 3}).then(result => {
+                    return{
+                        data: result.data,
+                    }
+                })
+            break;
+            default:
+
+        }
     }
 
     function handleSubmitBack(){
@@ -27,13 +53,13 @@ export default Verify = ({ navigation }) => {
                 <Text style={styles.headerText}>Selecione sua digital: </Text>
             </View>
             <ScrollView>
-                <TouchableOpacity onPress={() => handleSubmitImage(Image1)}>
+                <TouchableOpacity onPress={() => handleSubmitImage(1)}>
                     <Image style={styles.fingerImage} source={Image1}/>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleSubmitImage(Image2)}>
+                <TouchableOpacity onPress={() => handleSubmitImage(2)}>
                     <Image style={styles.fingerImage} source={Image2}/>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleSubmitImage(Image3)}>
+                <TouchableOpacity onPress={() => handleSubmitImage(3)}>
                     <Image style={styles.fingerImage} source={Image3}/>
                 </TouchableOpacity>
             </ScrollView>
