@@ -12,15 +12,8 @@ const deviceWidth = Dimensions.get('window').width;
 
 export default Verify = ({ navigation }) => {
 
-    async function handleSubmitImage(img){
-        const response = await apiCall(img);
-
-        if(response.data.validade === 'success'){
-            alert('Assinada com sucesso!');
-            navigation.navigate('Options');
-        }else{
-            alert('Falha ao bater digitais. Por favor tente novamente')
-        }
+    function handleSubmitImage(img){
+        apiCall(img);
     }
 
     function handleSubmitBack(){
@@ -29,13 +22,14 @@ export default Verify = ({ navigation }) => {
 
     function apiCall(string){
         Service.post('/users/authBiometry', {dedo : string}).then(result =>{
-            return{
-                data: result.data,
+
+            if(result.data.validade === 'success'){
+                alert('Assinada com sucesso!');
+                navigation.navigate('Options');
+            }else{
+                alert('Falha ao bater digitais. Por favor tente novamente')
             }
-        }).catch(err =>{
-            console.log(err);
-            setError('Ops !! algo deu errado');
-        }).finally();
+        })
     }
 
     return (
