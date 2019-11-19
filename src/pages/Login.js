@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
-import {Image, KeyboardAvoidingView, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import AvatarImg from '../../assets/avataaars.png';
-import {Button, CheckBox, Input} from 'react-native-elements'
+import {KeyboardAvoidingView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Button, CheckBox, Header, Input, Text} from 'react-native-elements'
 import Service from "../service/BaseAxios";
 import {onSignIn} from "../service/Storage";
 
 export default function Login({navigation}) {
-    const [user, setUser] = useState('andre@gmail.com');
-    const [password, setPassword] = useState('123456');
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
     const [Loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -16,7 +15,7 @@ export default function Login({navigation}) {
     }
 
     function goToRegister() {
-        navigation.navigate('Register');
+        navigation.navigate({routeName: 'Register', key: 'login'});
     }
 
     function login() {
@@ -47,39 +46,40 @@ export default function Login({navigation}) {
     return (
         <KeyboardAvoidingView behavior="padding">
             <View style={styles.container}>
-                <Text style={styles.mainTitle}>Hi !!</Text>
+                <Header backgroundColor={'#01755D'} centerComponent={{
+                    text: 'Hii! seja bem-vindo :)',
+                    style: {color: '#fff', fontWeight: 'bold', fontSize: 22}
+                }}/>
 
-                <View style={styles.avatarContainer}>
-                    <Image style={styles.avatar} source={AvatarImg}/>
-
-                    <View style={{marginTop: 16, width: "100%"}}>
-                        <Input
-                            leftIcon={{type: 'feather', name: 'user', color: "#fff"}}
-                            leftIconContainerStyle={{marginEnd: 16}}
-                            placeholder='Login'
-                            errorStyle={{color: '#fff'}}
-                            labelProps={{color: '#fff'}}
-                            inputStyle={{color: '#fff'}}
-                            containerStyle={{marginTop: 16}}
-                            errorMessage={error}
-                            value={user}
-                            onChangeText={value => setUser(value)}/>
-                        <Input
-                            leftIcon={{type: 'feather', name: 'lock', color: "#fff"}}
-                            leftIconContainerStyle={{marginEnd: 16}}
-                            placeholder='Password'
-                            errorStyle={{color: '#fff'}}
-                            labelProps={{color: '#fff'}}
-                            inputStyle={{color: '#fff'}}
-                            containerStyle={{marginTop: 16}}
-                            value={password}
-                            onChangeText={value => setPassword(value)}
-                            secureTextEntry={true}/>
-                        <TouchableOpacity onPress={() => goToRegister()}>
-                            <Text style={{color: '#fff', marginStart: 16}}>Nao tem uma conta ainda? Borá fazer
-                                uma!</Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style={{backgroundColor: '#01755D', padding: 0, marginTop: -10, width: '100%'}}>
+                    <Text h4 style={{color: '#fff', fontWeight: 'bold', fontSize: 12, marginTop: 16, marginStart: 22}}>Log
+                        In</Text>
+                    <Input
+                        leftIcon={{type: 'feather', name: 'user', color: "#fff"}}
+                        leftIconContainerStyle={{marginEnd: 16}}
+                        placeholder='Login'
+                        errorStyle={{color: '#fff'}}
+                        labelProps={{color: '#fff'}}
+                        inputStyle={{color: '#fff'}}
+                        containerStyle={{marginTop: 16}}
+                        errorMessage={error}
+                        value={user}
+                        onChangeText={value => setUser(value)}/>
+                    <Input
+                        leftIcon={{type: 'feather', name: 'lock', color: "#fff"}}
+                        leftIconContainerStyle={{marginEnd: 16}}
+                        placeholder='Password'
+                        errorStyle={{color: '#fff'}}
+                        labelProps={{color: '#fff'}}
+                        inputStyle={{color: '#fff'}}
+                        containerStyle={{marginTop: 16}}
+                        value={password}
+                        onChangeText={value => setPassword(value)}
+                        secureTextEntry={true}/>
+                    <TouchableOpacity onPress={() => goToRegister()}>
+                        <Text style={{color: '#fff', marginStart: 16}}>Nao tem uma conta ainda? Borá fazer
+                            uma!</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.inputsContainer}>
@@ -102,10 +102,7 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         width: '100%',
-        justifyContent: 'space-between',
-        alignItems: 'center',
         backgroundColor: '#01755D',
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 20 : 0,
     },
     mainTitle: {
         fontSize: 34,
@@ -134,6 +131,8 @@ const styles = StyleSheet.create({
     },
     inputsContainer: {
         width: '100%',
+        position: 'absolute',
+        bottom: 0,
     },
     loginButtonContainer: {
         backgroundColor: '#c5fcf0',
