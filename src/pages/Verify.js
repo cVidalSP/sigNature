@@ -12,8 +12,8 @@ const deviceWidth = Dimensions.get('window').width;
 
 export default Verify = ({ navigation }) => {
 
-    function handleSubmitImage(img){
-        const response = apiCall(img);
+    async function handleSubmitImage(img){
+        const response = await apiCall(img);
 
         if(response.data.validade === 'success'){
             alert('Assinada com sucesso!');
@@ -32,7 +32,10 @@ export default Verify = ({ navigation }) => {
             return{
                 data: result.data,
             }
-        })
+        }).catch(err =>{
+            console.log(err);
+            setError('Ops !! algo deu errado');
+        }).finally();
     }
 
     return (
