@@ -15,7 +15,7 @@ export default Verify = ({ navigation }) => {
     function handleSubmitImage(img){
         const response = apiCall(img);
 
-        if(response.data === 'success'){
+        if(response.data.validade === 'success'){
             alert('Assinada com sucesso!');
             navigation.navigate('Options');
         }else{
